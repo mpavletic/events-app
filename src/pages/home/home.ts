@@ -12,6 +12,7 @@ export class HomePage implements OnInit {
   eventsDate: Array<string> = [];
   categories: any = {};
   pageNumber: number = 1;
+  hasMoreItems: boolean = false;
 
   constructor(private eventsProvider: EventsProvider, public navCtrl: NavController, public loadingCtrl: LoadingController) {
   }
@@ -26,6 +27,8 @@ export class HomePage implements OnInit {
       this.events = this.groupEventsByDay(response['events']);
       // Create an array of strings with the days for iteration
       this.eventsDate = Object.keys(this.events);
+
+      this.hasMoreItems = response['pagination'].has_more_items;
 
       loading.dismiss();
     });
@@ -60,6 +63,24 @@ export class HomePage implements OnInit {
 
       return result;
     }.bind(this), this.events);
+  }
+
+  getMoreEvents(infiniteScroll) {
+    this.pageNumber++;
+
+    this.eventsProvider.getAll(this.pageNumber).subscribe(response => {
+      const events = response['events'];
+      this.events = this.groupEventsByDay(events);
+
+      // Add new events dates
+      events.forEach(event => {
+        this.eventsDate.push(this.getTime(event.start.local).toString());
+      });
+
+      this.hasMoreItems = response['pagination'].has_more_items;
+
+      infiniteScroll.complete();
+    });
   }
 
 }
