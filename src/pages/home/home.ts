@@ -8,9 +8,9 @@ import { AppConstants } from '../../app/app.constants';
   templateUrl: 'home.html'
 })
 export class HomePage implements OnInit {
-  events: Object = {};
+  events: any = {};
   eventsDate: Array<string> = [];
-  categories: Object = {};
+  categories: any = {};
   pageNumber: number = 1;
 
   constructor(private eventsProvider: EventsProvider, public navCtrl: NavController, public loadingCtrl: LoadingController) {
@@ -23,18 +23,7 @@ export class HomePage implements OnInit {
     this.categories = AppConstants.CATEGORIES;
     loading.present();
     this.eventsProvider.getAll(this.pageNumber).subscribe(response => {
-      // group the events by date. Create a map with day as index and an array of events as values
-      this.events = response['events'].reduce(function(result, event) {
-        const dateTime = this.getTime(event.start.local);
-
-        if (result[dateTime]) {
-          result[dateTime].push(event)
-        } else {
-          result[dateTime] = [event];
-        }
-
-        return result;
-      }.bind(this), {});
+      this.events = this.groupEventsByDay(response['events']);
       // Create an array of strings with the days for iteration
       this.eventsDate = Object.keys(this.events);
 
@@ -52,6 +41,25 @@ export class HomePage implements OnInit {
     dateEvent.setHours(0, 0, 0, 0);
 
     return dateEvent.getTime();
+  }
+
+  /**
+   * Group the events by date. Create a map with date as index and an array of events as values
+   * @param {Array} events - List of events
+   * @returns {Object} a map with a list of events for each day
+   */
+  private groupEventsByDay(events: Array<any>): any {
+    return events.reduce(function(result, event) {
+      const dateTime = this.getTime(event.start.local);
+
+      if (result[dateTime]) {
+        result[dateTime].push(event)
+      } else {
+        result[dateTime] = [event];
+      }
+
+      return result;
+    }.bind(this), this.events);
   }
 
 }
