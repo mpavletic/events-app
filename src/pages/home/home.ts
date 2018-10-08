@@ -8,9 +8,10 @@ import { AppConstants } from '../../app/app.constants';
   templateUrl: 'home.html'
 })
 export class HomePage implements OnInit {
-  events: {};
-  eventsDate: Array<string>;
-  categories: {};
+  events: Object = {};
+  eventsDate: Array<string> = [];
+  categories: Object = {};
+  pageNumber: number = 1;
 
   constructor(private eventsProvider: EventsProvider, public navCtrl: NavController, public loadingCtrl: LoadingController) {
   }
@@ -21,7 +22,7 @@ export class HomePage implements OnInit {
     });
     this.categories = AppConstants.CATEGORIES;
     loading.present();
-    this.eventsProvider.getAll().subscribe(response => {
+    this.eventsProvider.getAll(this.pageNumber).subscribe(response => {
       // group the events by date. Create a map with day as index and an array of events as values
       this.events = response['events'].reduce(function(result, event) {
         let dateEvent = new Date(event.start.local);
