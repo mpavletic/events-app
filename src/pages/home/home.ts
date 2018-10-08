@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 import { EventsProvider } from '../../providers/events/events';
 import { AppConstants } from '../../app/app.constants';
 
@@ -12,11 +12,15 @@ export class HomePage implements OnInit {
   eventsDate: Array<string>;
   categories: {};
 
-  constructor(private eventsProvider: EventsProvider, public navCtrl: NavController) {
+  constructor(private eventsProvider: EventsProvider, public navCtrl: NavController, public loadingCtrl: LoadingController) {
   }
 
   ngOnInit() {
+    let loading = this.loadingCtrl.create({
+      content: 'Cargando eventos...'
+    });
     this.categories = AppConstants.CATEGORIES;
+    loading.present();
     this.eventsProvider.getAll().subscribe(response => {
       // group the events by date. Create a map with day as index and an array of events as values
       this.events = response['events'].reduce(function(result, event) {
@@ -34,6 +38,8 @@ export class HomePage implements OnInit {
       }, {});
       // Create an array of strings with the days for iteration
       this.eventsDate = Object.keys(this.events);
+
+      loading.dismiss();
     });
   }
 
