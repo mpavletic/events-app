@@ -21,13 +21,14 @@ export class EventsProvider {
   constructor(public http: HttpClient) {
   }
 
-  getAll() {
+  getAll(page: number) {
     return this.http.get(`${this.apiURL}events/search/`, {
       headers: this.httpOptions.headers,
       params: {
         'location.latitude': AppConstants.BUENOS_AIRES_LATITUDE,
         'location.longitude': AppConstants.BUENOS_AIRES_LONGITUDE,
-        'sort_by': 'date'
+        'sort_by': 'date',
+        page: page.toString()
       }
     });
   }
