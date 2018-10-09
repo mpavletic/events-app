@@ -1,5 +1,7 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar
+    color="secondary"
+  >
     <ion-title>
       BAires Eventos
     </ion-title>
@@ -11,7 +13,7 @@
       *ngFor="let time of eventsDate"
     >
       <ion-card-header
-        color="primary"
+        color="secondary"
       >
         {{ time | date: 'longDate' }}
       </ion-card-header>
