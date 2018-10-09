@@ -1,0 +1,2 @@
+# BAEventos App
+This is just a proof of concept of a simple app to display events on the city of Buenos Aires, Argentina. Goal of this repository is to apply the knowledge obtained on an udemy course for new version of angular.
