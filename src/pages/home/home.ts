@@ -83,4 +83,10 @@ export class HomePage implements OnInit {
     });
   }
 
+  goToEventDetail(event: any) {
+    this.navCtrl.push('EventDetailPage', {
+      event: event
+    });
+  }
+
 }

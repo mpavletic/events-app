@@ -17,8 +17,10 @@
       </ion-card-header>
 
       <ion-list>
-        <ion-item
+        <button
           *ngFor="let event of events[time]"
+          (click)="goToEventDetail(event)"
+          ion-item
           text-wrap
         >
           <ion-icon
@@ -32,7 +34,7 @@
           >
             {{ event.start.local | date: 'shortTime' }}
           </ion-note>
-        </ion-item>
+        </button>
       </ion-list>
     </ion-card>
 
