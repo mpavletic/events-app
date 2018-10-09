@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>events</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+<widget id="com.mpavletic.baeventos" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>BAEventos</name>
+    <description>A POC of an events app using the new version of angular</description>
+    <author email="mpavletic.dev@gmail.com" href="https://github.com/mpavletic">Martin Pavletic</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
