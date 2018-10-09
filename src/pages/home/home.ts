@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController, IonicPage } from 'ionic-angular';
 import { EventsProvider } from '../../providers/events/events';
 import { AppConstants } from '../../app/app.constants';
 
+@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -80,6 +81,12 @@ export class HomePage implements OnInit {
       this.hasMoreItems = response['pagination'].has_more_items;
 
       infiniteScroll.complete();
+    });
+  }
+
+  goToEventDetail(event: any) {
+    this.navCtrl.push('EventDetailPage', {
+      event: event
     });
   }
 
