@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title
+      *ngIf="eventObs | async as event"
+    >
+      {{ event.name }}
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card
+    *ngIf="eventObs | async as event"
+  >
+    <ion-img
+      *ngIf="event.logo"
+      [src]="event.logo.url"
+    ></ion-img>
+
+    <ion-card-header>
+      <ion-card-subtitle>{{ event.date | date }}</ion-card-subtitle>
+      <ion-card-title>{{ event.name }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{ event.description }}
+    </ion-card-content>
+  </ion-card>
+</ion-content>
