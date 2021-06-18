@@ -1,7 +1,5 @@
 {
-  "name": "events",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "ionic-angular"
+  "name": "BA Events",
+  "integrations": {},
+  "type": "angular"
 }
