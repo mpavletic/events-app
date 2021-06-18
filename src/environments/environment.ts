@@ -3,6 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  api: {
+    url: 'http://localhost:8100/assets/events.json'
+  },
   production: false
 };
 
